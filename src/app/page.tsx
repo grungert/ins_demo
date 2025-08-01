@@ -273,17 +273,22 @@ export default function Home() {
                 description: "Breaking down barriers between traditional academic disciplines.",
                 color: "from-pink-500 to-rose-500"
               }
-            ].map((area, index) => (
-              <div key={index} className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105 transform hover:-translate-y-2 group">
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${area.color} mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}></div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors duration-300">{area.title}</h3>
-                <p className="text-gray-600 mb-6 group-hover:text-gray-700 transition-colors duration-300">{area.description}</p>
-                <button className="text-gray-900 font-medium flex items-center space-x-2 hover:space-x-3 transition-all duration-300 group-hover:text-gray-700">
-                  <span>Learn more</span>
-                  <ChevronRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
-                </button>
-              </div>
-            ))}
+            ].map((area, index) => {
+              const hoverColor = index === 0 ? 'group-hover:text-blue-600' : 
+                                index === 1 ? 'group-hover:text-green-600' : 
+                                'group-hover:text-pink-600';
+              return (
+                <div key={index} className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105 transform hover:-translate-y-2 group">
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${area.color} mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}></div>
+                  <h3 className={`text-xl font-bold text-gray-900 mb-4 ${hoverColor} transition-colors duration-300`}>{area.title}</h3>
+                  <p className="text-gray-600 mb-6 group-hover:text-gray-700 transition-colors duration-300">{area.description}</p>
+                  <button className="text-gray-900 font-medium flex items-center space-x-2 hover:space-x-3 transition-all duration-300 group-hover:text-gray-700">
+                    <span>Learn more</span>
+                    <ChevronRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -452,7 +457,7 @@ export default function Home() {
                   ].map((service, index) => (
                     <div key={index} className="group p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 cursor-pointer border border-gray-100 hover:border-gray-200 hover:shadow-md flex-shrink-0">
                       <div className="flex items-center space-x-4">
-                        <div className={`w-12 h-12 rounded-lg ${service.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <div className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <svg className={`w-6 h-6 ${service.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={service.svgPath} />
                           </svg>
@@ -509,7 +514,7 @@ export default function Home() {
                     >
                       <div className="flex items-start space-x-4">
                         {/* Icon */}
-                        <div className={`flex-shrink-0 w-12 h-12 rounded-full ${notification.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <svg className={`w-6 h-6 ${notification.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={notification.svgPath} />
                           </svg>
@@ -521,14 +526,9 @@ export default function Home() {
                             <h3 className="text-lg font-bold text-gray-900 group-hover:text-gray-700 transition-colors duration-300">
                               {notification.title}
                             </h3>
-                            <div className="flex items-center space-x-3">
-                              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${notification.pillColor} text-white`}>
-                                {notification.type}
-                              </span>
-                              <span className="text-sm text-gray-500 flex-shrink-0">
-                                {notification.date}
-                              </span>
-                            </div>
+                            <span className="text-sm text-gray-500 flex-shrink-0">
+                              {notification.date}
+                            </span>
                           </div>
                           <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                             {notification.content}
@@ -567,7 +567,7 @@ export default function Home() {
                       >
                         <div className="flex items-start space-x-4">
                           {/* Icon */}
-                          <div className={`flex-shrink-0 w-12 h-12 rounded-full ${notification.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                          <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <svg className={`w-6 h-6 ${notification.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={notification.svgPath} />
                             </svg>
@@ -579,14 +579,9 @@ export default function Home() {
                               <h3 className="text-lg font-bold text-gray-900 group-hover:text-gray-700 transition-colors duration-300">
                                 {notification.title}
                               </h3>
-                              <div className="flex items-center space-x-3">
-                                <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${notification.pillColor} text-white`}>
-                                  {notification.type}
-                                </span>
-                                <span className="text-sm text-gray-500 flex-shrink-0">
-                                  {notification.date}
-                                </span>
-                              </div>
+                              <span className="text-sm text-gray-500 flex-shrink-0">
+                                {notification.date}
+                              </span>
                             </div>
                             <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                               {notification.content}
@@ -776,7 +771,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="col-span-2">
               <Image
-                src="/ims-logo.png"
+                src="/img-logo.svg"
                 alt="Institute for Advanced Studies"
                 width={280}
                 height={80}

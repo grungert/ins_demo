@@ -55,7 +55,7 @@ export default function AboutPage() {
                   <div className="flex items-start space-x-4">
                     <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 mt-2 group-hover:scale-125 transition-transform duration-300"></div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                      <h3 className="text-xl font-bold mb-4 transition-colors duration-300 text-gray-900 hover:text-teal-600 group-hover:text-teal-600">
                         Društvene i humanističke nauke
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
@@ -70,7 +70,7 @@ export default function AboutPage() {
                   <div className="flex items-start space-x-4">
                     <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-500 to-teal-500 mt-2 group-hover:scale-125 transition-transform duration-300"></div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-green-600 transition-colors duration-300">
+                      <h3 className="text-xl font-bold mb-4 transition-colors duration-300 text-gray-900 hover:text-green-600 group-hover:text-green-600">
                         Informaciono-komunikacione tehnologije
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
@@ -85,7 +85,7 @@ export default function AboutPage() {
                   <div className="flex items-start space-x-4">
                     <div className="w-4 h-4 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 mt-2 group-hover:scale-125 transition-transform duration-300"></div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-pink-600 transition-colors duration-300">
+                      <h3 className="text-xl font-bold mb-4 transition-colors duration-300 text-gray-900 hover:text-pink-600 group-hover:text-pink-600">
                         Biomedicina
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
@@ -269,7 +269,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="col-span-2">
               <Image
-                src="/ims-logo.png"
+                src="/img-logo.svg"
                 alt="Institute for Advanced Studies"
                 width={280}
                 height={80}

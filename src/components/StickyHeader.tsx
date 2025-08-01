@@ -54,7 +54,7 @@ export default function StickyHeader() {
               }`}
             >
               <Image
-                src="/ims-logo.png"
+                src="/img-logo.svg"
                 alt="Institute for Advanced Studies"
                 width={280}
                 height={80}
