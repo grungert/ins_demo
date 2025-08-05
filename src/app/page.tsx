@@ -278,7 +278,7 @@ export default function Home() {
                                 index === 1 ? 'group-hover:text-green-600' : 
                                 'group-hover:text-pink-600';
               return (
-                <div key={index} className="bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105 transform hover:-translate-y-2 group">
+                <div key={index} className="bg-gray-50 hover:bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-500 hover:scale-105 transform hover:-translate-y-2 group">
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${area.color} mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}></div>
                   <h3 className={`text-xl font-bold text-gray-900 mb-4 ${hoverColor} transition-colors duration-300`}>{area.title}</h3>
                   <p className="text-gray-600 mb-6 group-hover:text-gray-700 transition-colors duration-300">{area.description}</p>
@@ -535,9 +535,6 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                      
-                      {/* Hover border effect */}
-                      <div className={`absolute inset-0 rounded-2xl ${notification.pillColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}></div>
                     </div>
                   ))}
                 </div>
@@ -588,9 +585,6 @@ export default function Home() {
                             </p>
                           </div>
                         </div>
-                        
-                        {/* Hover border effect */}
-                        <div className={`absolute inset-0 rounded-2xl ${notification.pillColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none`}></div>
                       </div>
                     ))}
                   </div>
