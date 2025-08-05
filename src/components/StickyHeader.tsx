@@ -5,7 +5,6 @@ import Image from 'next/image';
 
 export default function StickyHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -14,7 +13,6 @@ export default function StickyHeader() {
       const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = (currentScrollY / documentHeight) * 100;
       
-      setScrollY(currentScrollY);
       setScrollProgress(Math.min(progress, 100));
       setIsScrolled(currentScrollY > 50);
     };
@@ -75,7 +73,7 @@ export default function StickyHeader() {
               { name: 'Notifications', id: 'notifications', color: 'from-orange-500 to-red-500', bgColor: 'bg-orange-500/20', icon: '🔔' },
               { name: 'About', id: 'about', color: 'from-blue-500 to-indigo-500', bgColor: 'bg-blue-500/20', icon: '🏛️' },
               { name: 'Contact', id: 'contact', color: 'from-purple-500 to-violet-500', bgColor: 'bg-purple-500/20', icon: '✉️' }
-            ].map((item, index) => (
+            ].map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.id)}

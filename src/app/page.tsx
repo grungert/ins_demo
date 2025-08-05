@@ -101,7 +101,7 @@ export default function Home() {
   const notificationsPerPage = 4;
 
   // Simulate API call to load notifications
-  const simulateApiCall = (direction: string) => {
+  const simulateApiCall = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(true);
@@ -123,7 +123,7 @@ export default function Home() {
     setAnimationDirection('down');
     
     // API call simulation
-    await simulateApiCall('down');
+    await simulateApiCall();
     
     const newNotifications = allNotifications.slice(startIndex, endIndex);
     
@@ -153,7 +153,7 @@ export default function Home() {
     setAnimationDirection('up');
     
     // API call simulation
-    await simulateApiCall('up');
+    await simulateApiCall();
     
     const newNotifications = allNotifications.slice(startIndex, endIndex);
     
@@ -681,7 +681,7 @@ export default function Home() {
               Get In Touch
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Ready to collaborate or learn more about our research? We'd love to hear from you.
+              Ready to collaborate or learn more about our research? We&apos;d love to hear from you.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
