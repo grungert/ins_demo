@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import StickyHeader from "@/components/StickyHeader";
 import { AcademicCapIcon, EyeIcon, HeartIcon, BuildingOfficeIcon, ClockIcon } from "@heroicons/react/24/outline";
 
@@ -320,10 +321,10 @@ export default function ProfilePage() {
             <div>
               <h4 className="font-bold mb-4 text-white">Quick Links</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="/" className="hover:text-blue-400 transition-colors duration-300">Home</a></li>
-                <li><a href="/research/programs" className="hover:text-teal-400 transition-colors duration-300">Research</a></li>
-                <li><a href="/about-us/people" className="hover:text-green-400 transition-colors duration-300">People</a></li>
-                <li><a href="/news" className="hover:text-pink-400 transition-colors duration-300">News</a></li>
+                <li><Link href="/" className="hover:text-blue-400 transition-colors duration-300">Home</Link></li>
+                <li><Link href="/research/programs" className="hover:text-teal-400 transition-colors duration-300">Research</Link></li>
+                <li><Link href="/about-us/people" className="hover:text-green-400 transition-colors duration-300">People</Link></li>
+                <li><Link href="/news" className="hover:text-pink-400 transition-colors duration-300">News</Link></li>
               </ul>
             </div>
             <div>

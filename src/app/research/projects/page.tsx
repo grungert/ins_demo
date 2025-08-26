@@ -1,8 +1,9 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import StickyHeader from "@/components/StickyHeader";
-import { FolderIcon, ClockIcon, CurrencyDollarIcon, UserGroupIcon, CheckCircleIcon, PlayIcon, PauseIcon } from "@heroicons/react/24/outline";
+import { FolderIcon, ClockIcon, CurrencyDollarIcon, UserGroupIcon, CheckCircleIcon, PlayIcon } from "@heroicons/react/24/outline";
 
 export default function ProjectsPage() {
   return (
@@ -328,10 +329,10 @@ export default function ProjectsPage() {
             <div>
               <h4 className="font-bold mb-4 text-white">Quick Links</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="/" className="hover:text-purple-400 transition-colors duration-300">Home</a></li>
-                <li><a href="/research/programs" className="hover:text-teal-400 transition-colors duration-300">Programs</a></li>
-                <li><a href="/research/publications" className="hover:text-pink-400 transition-colors duration-300">Publications</a></li>
-                <li><a href="/about-us/people" className="hover:text-blue-400 transition-colors duration-300">People</a></li>
+                <li><Link href="/" className="hover:text-purple-400 transition-colors duration-300">Home</Link></li>
+                <li><Link href="/research/programs" className="hover:text-teal-400 transition-colors duration-300">Programs</Link></li>
+                <li><Link href="/research/publications" className="hover:text-pink-400 transition-colors duration-300">Publications</Link></li>
+                <li><Link href="/about-us/people" className="hover:text-blue-400 transition-colors duration-300">People</Link></li>
               </ul>
             </div>
             <div>

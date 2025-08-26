@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import StickyHeader from "@/components/StickyHeader";
 import { BookOpenIcon, PencilSquareIcon, DocumentTextIcon, GlobeAltIcon, ArrowDownTrayIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 
@@ -421,10 +422,10 @@ export default function PublishingPage() {
             <div>
               <h4 className="font-bold mb-4 text-white">Quick Links</h4>
               <ul className="space-y-2 text-gray-300">
-                <li><a href="/" className="hover:text-emerald-400 transition-colors duration-300">Home</a></li>
-                <li><a href="/outreach/events" className="hover:text-teal-400 transition-colors duration-300">Events</a></li>
-                <li><a href="/outreach/collaborations" className="hover:text-green-400 transition-colors duration-300">Collaborations</a></li>
-                <li><a href="/research/publications" className="hover:text-blue-400 transition-colors duration-300">Publications</a></li>
+                <li><Link href="/" className="hover:text-emerald-400 transition-colors duration-300">Home</Link></li>
+                <li><Link href="/outreach/events" className="hover:text-teal-400 transition-colors duration-300">Events</Link></li>
+                <li><Link href="/outreach/collaborations" className="hover:text-green-400 transition-colors duration-300">Collaborations</Link></li>
+                <li><Link href="/research/publications" className="hover:text-blue-400 transition-colors duration-300">Publications</Link></li>
               </ul>
             </div>
             <div>

@@ -47,9 +47,6 @@ export default function StickyHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleDropdownToggle = (menuId: string) => {
-    setActiveDropdown(activeDropdown === menuId ? null : menuId);
-  };
 
   return (
     <header 
@@ -144,11 +141,11 @@ export default function StickyHeader() {
               <div key={item.name} className="relative">
                 {item.hasDropdown ? (
                   <button
-                    onMouseEnter={() => setActiveDropdown(item.id)}
+                    onMouseEnter={() => setActiveDropdown(item.id || null)}
                     className={`
                       relative px-4 py-2 rounded-full font-medium group overflow-hidden flex items-center space-x-1
                       ${isScrolled ? 'text-gray-700' : 'text-gray-700'}
-                      ${isMenuItemActive(item.id, item.items) ? 'text-white' : ''}
+                      ${isMenuItemActive(item.id || '', item.items) ? 'text-white' : ''}
                       transition-all duration-200 ease-out
                       hover:-translate-y-1 hover:shadow-lg
                       min-w-[100px] text-center
@@ -157,7 +154,7 @@ export default function StickyHeader() {
                     {/* Background gradient on hover and active */}
                     <div className={`
                       absolute inset-0 bg-gradient-to-r ${item.color} 
-                      ${isMenuItemActive(item.id, item.items) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'} 
+                      ${isMenuItemActive(item.id || '', item.items) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'} 
                       group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 ease-out
                       rounded-full
                     `} />
@@ -165,7 +162,7 @@ export default function StickyHeader() {
                     {/* Icon that appears on hover and active */}
                     <span className={`
                       absolute -top-1 -right-1 text-xs 
-                      ${isMenuItemActive(item.id, item.items) ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-0 rotate-12'}
+                      ${isMenuItemActive(item.id || '', item.items) ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-0 rotate-12'}
                       group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-0
                       transition-all duration-200 ease-out transform
                     `}>
@@ -175,7 +172,7 @@ export default function StickyHeader() {
                     {/* Text */}
                     <span className={`
                       relative z-10 transition-colors duration-200 ease-out
-                      ${isMenuItemActive(item.id, item.items) ? 'text-white drop-shadow-sm' : ''}
+                      ${isMenuItemActive(item.id || '', item.items) ? 'text-white drop-shadow-sm' : ''}
                       group-hover:text-white group-hover:drop-shadow-sm
                     `}>
                       {item.name}
@@ -184,7 +181,7 @@ export default function StickyHeader() {
                     {/* Dropdown arrow */}
                     <ChevronDownIcon className={`
                       w-4 h-4 relative z-10 transition-all duration-200 ease-out
-                      ${isMenuItemActive(item.id, item.items) ? 'text-white' : ''}
+                      ${isMenuItemActive(item.id || '', item.items) ? 'text-white' : ''}
                       group-hover:text-white
                       ${activeDropdown === item.id ? 'rotate-180' : 'rotate-0'}
                     `} />
@@ -248,7 +245,7 @@ export default function StickyHeader() {
                 {item.hasDropdown && activeDropdown === item.id && (
                   <div 
                     className="absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 py-4 px-2 z-50"
-                    onMouseEnter={() => setActiveDropdown(item.id)}
+                    onMouseEnter={() => setActiveDropdown(item.id || null)}
                     onMouseLeave={() => setActiveDropdown(null)}
                   >
                     {item.items?.map((subItem, index) => (
