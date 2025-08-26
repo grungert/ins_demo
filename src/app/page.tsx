@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronRightIcon, ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import Slideshow from "@/components/Slideshow";
 import StickyHeader from "@/components/StickyHeader";
@@ -282,10 +283,10 @@ export default function Home() {
                   <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${area.color} mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}></div>
                   <h3 className={`text-xl font-bold text-gray-900 mb-4 ${hoverColor} transition-colors duration-300`}>{area.title}</h3>
                   <p className="text-gray-600 mb-6 group-hover:text-gray-700 transition-colors duration-300">{area.description}</p>
-                  <button className="text-gray-900 font-medium flex items-center space-x-2 hover:space-x-3 transition-all duration-300 group-hover:text-gray-700">
+                  <Link href="/research/programs" className="text-gray-900 font-medium flex items-center space-x-2 hover:space-x-3 transition-all duration-300 group-hover:text-gray-700">
                     <span>Learn more</span>
                     <ChevronRightIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-2" />
-                  </button>
+                  </Link>
                 </div>
               );
             })}
@@ -375,7 +376,7 @@ export default function Home() {
           
           {/* Amazing Read More News Button */}
           <div className="flex justify-center mt-16">
-            <button className="group relative px-8 py-4 bg-transparent text-gray-700 font-semibold rounded-full overflow-hidden transform transition-all duration-300 ease-out hover:scale-110 hover:shadow-2xl hover:-translate-y-2">
+            <Link href="/news" className="group relative px-8 py-4 bg-transparent text-gray-700 font-semibold rounded-full overflow-hidden transform transition-all duration-300 ease-out hover:scale-110 hover:shadow-2xl hover:-translate-y-2 inline-block">
               {/* Animated background */}
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out transform scale-75 group-hover:scale-100 rounded-full"></div>
               
@@ -402,7 +403,7 @@ export default function Home() {
               
               {/* Pulsing ring effect */}
               <div className="absolute inset-0 rounded-full border-2 border-white/30 opacity-0 group-hover:opacity-100 animate-ping"></div>
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -413,9 +414,6 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Notifications
-              <span className="block text-lg font-normal text-gray-600 mt-2">
-                Obavještenja
-              </span>
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Stay updated with the latest announcements, deadlines, and important information.
@@ -428,9 +426,6 @@ export default function Home() {
               <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col relative" style={{ height: '680px' }}>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center flex-shrink-0">
                   Academic Services
-                  <span className="block text-sm font-normal text-gray-600 mt-1">
-                    Akademski servisi
-                  </span>
                 </h3>
                 
                 {/* Scrollable Services Container */}
@@ -440,20 +435,20 @@ export default function Home() {
                 <div className="absolute left-6 right-6 h-8 bg-gradient-to-b from-white to-transparent pointer-events-none z-10 opacity-0 transition-opacity duration-300" id="top-shadow" style={{ top: '102px' }}></div>
                 <div className="absolute bottom-20 left-6 right-6 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none z-10 opacity-100 transition-opacity duration-300" id="bottom-shadow"></div>
                   {[
-                    { name: "Competitions", nameLocal: "Konkursi", bgColor: "bg-blue-100", iconColor: "text-blue-600", svgPath: "M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" },
-                    { name: "Bulletins", nameLocal: "Bilteni", bgColor: "bg-red-100", iconColor: "text-red-600", svgPath: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-                    { name: "EBSCO Database", nameLocal: "EBSCO baze podataka", bgColor: "bg-green-100", iconColor: "text-green-600", svgPath: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" },
-                    { name: "Academic Calendar", nameLocal: "Akademski kalendar", bgColor: "bg-orange-100", iconColor: "text-orange-600", svgPath: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
-                    { name: "Student Information", nameLocal: "Studentski informator", bgColor: "bg-purple-100", iconColor: "text-purple-600", svgPath: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-                    { name: "Health Insurance", nameLocal: "Zdravstveno osiguranje", bgColor: "bg-cyan-100", iconColor: "text-cyan-600", svgPath: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" },
+                    { name: "Competitions", nameLocal: "Academic Competitions", bgColor: "bg-blue-100", iconColor: "text-blue-600", svgPath: "M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" },
+                    { name: "Bulletins", nameLocal: "Academic Bulletins", bgColor: "bg-red-100", iconColor: "text-red-600", svgPath: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
+                    { name: "EBSCO Database", nameLocal: "Research Database Access", bgColor: "bg-green-100", iconColor: "text-green-600", svgPath: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" },
+                    { name: "Academic Calendar", nameLocal: "Events & Deadlines", bgColor: "bg-orange-100", iconColor: "text-orange-600", svgPath: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" },
+                    { name: "Student Information", nameLocal: "Student Handbook", bgColor: "bg-purple-100", iconColor: "text-purple-600", svgPath: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+                    { name: "Health Insurance", nameLocal: "Student Health Services", bgColor: "bg-cyan-100", iconColor: "text-cyan-600", svgPath: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" },
                     { name: "UNESCO Chair", nameLocal: "UNESCO Chair", bgColor: "bg-indigo-100", iconColor: "text-indigo-600", svgPath: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" },
-                    { name: "Alumni Card", nameLocal: "Alumni kartica", bgColor: "bg-amber-100", iconColor: "text-amber-600", svgPath: "M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" },
-                    { name: "European Youth Card", nameLocal: "Evropska omladinska kartica", bgColor: "bg-violet-100", iconColor: "text-violet-600", svgPath: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-                    { name: "Library Services", nameLocal: "Bibliotečke usluge", bgColor: "bg-emerald-100", iconColor: "text-emerald-600", svgPath: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
-                    { name: "Research Portal", nameLocal: "Istraživački portal", bgColor: "bg-sky-100", iconColor: "text-sky-600", svgPath: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" },
-                    { name: "Student Exchange", nameLocal: "Studentska razmjena", bgColor: "bg-pink-100", iconColor: "text-pink-600", svgPath: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" },
-                    { name: "Thesis Repository", nameLocal: "Repozitorij teza", bgColor: "bg-teal-100", iconColor: "text-teal-600", svgPath: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-                    { name: "Career Services", nameLocal: "Karijerne usluge", bgColor: "bg-yellow-100", iconColor: "text-yellow-600", svgPath: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0H8m8 0v6a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0V4a2 2 0 00-2-2H10a2 2 0 00-2 2v2" }
+                    { name: "Alumni Card", nameLocal: "Alumni Network Access", bgColor: "bg-amber-100", iconColor: "text-amber-600", svgPath: "M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" },
+                    { name: "European Youth Card", nameLocal: "Youth Benefits Program", bgColor: "bg-violet-100", iconColor: "text-violet-600", svgPath: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
+                    { name: "Library Services", nameLocal: "Digital & Physical Resources", bgColor: "bg-emerald-100", iconColor: "text-emerald-600", svgPath: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
+                    { name: "Research Portal", nameLocal: "Research Database Access", bgColor: "bg-sky-100", iconColor: "text-sky-600", svgPath: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" },
+                    { name: "Student Exchange", nameLocal: "International Programs", bgColor: "bg-pink-100", iconColor: "text-pink-600", svgPath: "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" },
+                    { name: "Thesis Repository", nameLocal: "Academic Publications", bgColor: "bg-teal-100", iconColor: "text-teal-600", svgPath: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
+                    { name: "Career Services", nameLocal: "Professional Development", bgColor: "bg-yellow-100", iconColor: "text-yellow-600", svgPath: "M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0H8m8 0v6a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0V4a2 2 0 00-2-2H10a2 2 0 00-2 2v2" }
                   ].map((service, index) => (
                     <div key={index} className="group p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 cursor-pointer border border-gray-100 hover:border-gray-200 hover:shadow-md flex-shrink-0">
                       <div className="flex items-center space-x-4">
