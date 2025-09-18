@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import StickyHeader from "@/components/StickyHeader";
+import GoogleMap from "@/components/GoogleMap";
 import { PhoneIcon, EnvelopeIcon, MapPinIcon, ClockIcon, UserIcon, BuildingOfficeIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
@@ -314,21 +315,18 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Map Placeholder */}
+              {/* Google Map */}
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
-                <div className="h-64 bg-gradient-to-r from-blue-400 to-cyan-500 flex items-center justify-center relative">
-                  <MapPinIcon className="w-16 h-16 text-white opacity-70" />
-                  <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 backdrop-blur-sm rounded-lg p-2">
-                    <p className="text-xs text-gray-800 font-medium">
-                      Mihaila Lalića bb<br />
-                      Podgorica 81000
-                    </p>
-                  </div>
-                </div>
+                <GoogleMap />
                 <div className="p-4 text-center">
-                  <button className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-300">
+                  <a
+                    href="https://maps.google.com/?q=Institute+for+Advanced+Studies,+Mihaila+Lalića+bb,+Podgorica,+Montenegro"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors duration-300"
+                  >
                     Open in Google Maps →
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
