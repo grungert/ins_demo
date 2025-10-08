@@ -1,0 +1,31 @@
+{
+  "recentItems": {
+    "count": 15,
+    "dateFormat": "+%Y-%m-%d %H:%M",
+    "titleFormat": "capitalize"
+  },
+  "statistics": {
+    "showSuccessMetrics": true,
+    "showKnowledgeAssets": true
+  },
+  "paths": {
+    "memoryBank": ".memory-bank",
+    "docsDir": ".memory-bank/docs",
+    "archiveIndex": ".memory-bank/archive-index.md"
+  },
+  "categories": {
+    "completed-docs": "Completed Documentation Sets",
+    "research-sessions": "Design & UX Research",
+    "component-patterns": "Component Patterns",
+    "documentation-practices": "Documentation Practices",
+    "design-decisions": "Design Decisions"
+  },
+  "filePatterns": {
+    "exclude": "*-index.md",
+    "docsPrefix": "completed-docs/",
+    "researchPrefix": "research-sessions/",
+    "patternPrefix": "component-patterns/",
+    "practicePrefix": "documentation-practices/",
+    "decisionPrefix": "design-decisions/"
+  }
+}

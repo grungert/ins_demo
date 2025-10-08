@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Cross-Platform Archive Statistics Launcher
+# Automatically detects OS and calls appropriate script version
+# Usage: ./update-archive-stats [config-file]
+
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Load OS detection utilities
+if [ -f "$SCRIPT_DIR/os-utils.sh" ]; then
+    source "$SCRIPT_DIR/os-utils.sh"
+else
+    echo "Error: os-utils.sh not found in $SCRIPT_DIR"
+    echo "This script requires os-utils.sh for cross-platform detection"
+    exit 1
+fi
+
+# Get appropriate script for current platform
+get_archive_script() {
+    local os_type=$(detect_os)
+    local script_dir="$1"
+
+    case "$os_type" in
+        "windows")
+            # Native Windows - use PowerShell
+            echo "$script_dir/update-archive-stats.ps1"
+            ;;
+        "macos"|"linux"|"windows_bash")
+            # Unix-like environments - use bash
+            echo "$script_dir/update-archive-stats.sh"
+            ;;
+        *)
+            # Unknown OS - default to bash with warning
+            echo "Warning: Unknown OS type '$os_type', defaulting to bash script" >&2
+            echo "$script_dir/update-archive-stats.sh"
+            ;;
+    esac
+}
+
+# Detect appropriate script
+TARGET_SCRIPT=$(get_archive_script "$SCRIPT_DIR")
+OS_TYPE=$(detect_os)
+
+echo "Detected OS: $OS_TYPE"
+echo "Using script: $(basename "$TARGET_SCRIPT")"
+
+# Check if target script exists
+if [ ! -f "$TARGET_SCRIPT" ]; then
+    echo "Error: Target script not found: $TARGET_SCRIPT"
+    echo "Available scripts in $SCRIPT_DIR:"
+    ls -la "$SCRIPT_DIR"/update-archive-stats.*
+    exit 1
+fi
+
+# Execute appropriate script with all arguments
+case "$OS_TYPE" in
+    "windows")
+        # For native Windows, use PowerShell
+        if command -v powershell.exe &> /dev/null; then
+            echo "Executing PowerShell script..."
+            powershell.exe -ExecutionPolicy Bypass -File "$TARGET_SCRIPT" "$@"
+        elif command -v pwsh &> /dev/null; then
+            echo "Executing PowerShell Core script..."
+            pwsh -ExecutionPolicy Bypass -File "$TARGET_SCRIPT" "$@"
+        else
+            echo "Error: PowerShell not available for Windows environment"
+            echo "Please install PowerShell or use Git Bash environment"
+            exit 1
+        fi
+        ;;
+    *)
+        # For Unix-like environments, execute bash script
+        echo "Executing bash script..."
+        bash "$TARGET_SCRIPT" "$@"
+        ;;
+esac
+
+# Capture exit code
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "Archive statistics updated successfully!"
+else
+    echo "Error: Script execution failed with exit code $EXIT_CODE"
+fi
+
+exit $EXIT_CODE

@@ -1,0 +1,54 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'mkdir -p .memory-bank/.logs && SESSION_ID=\"$(date +%s)-$$\" && echo \"$SESSION_ID\" > .memory-bank/.logs/.session-start && echo \"[$(date +\"%Y-%m-%d %H:%M:%S\")] [Session: $SESSION_ID] Session started\" >> .memory-bank/.logs/session-history.log'",
+            "description": "Generate session ID and log session start"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/log-agent-activity.sh",
+            "description": "Log detailed agent activity with component context"
+          },
+          {
+            "type": "command",
+            "command": ".claude/update-archive-stats",
+            "description": "Update archive indexes after any subagent completes"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'if [ -f .memory-bank/active-tech-doc.md ]; then grep -q \"Status: In Progress\" .memory-bank/active-tech-doc.md 2>/dev/null && echo \"⚠️  Active tech doc in progress\" || true; fi; if [ -f .memory-bank/active-story-doc.md ]; then grep -q \"Phase 1: Topic Approval\\|Phase 2: Story Writing\" .memory-bank/active-story-doc.md 2>/dev/null && echo \"⚠️  Active story generation in progress\" || true; fi'",
+            "description": "Detect active documentation work on new user prompts"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/log-session-end.sh",
+            "description": "Log session summary with duration, component count, and branch"
+          }
+        ]
+      }
+    ]
+  }
+}

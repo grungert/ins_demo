@@ -1,0 +1,270 @@
+{
+  "version": "1.0.0",
+  "description": "MCP configuration reference for documentation generation system",
+  "all_required": true,
+  "servers": {
+    "mcp-atlassian": {
+      "required": true,
+      "critical": true,
+      "purpose": "Jira and Confluence integration for requirements and story management",
+      "used_by": ["tech-doc-generator", "story-generator", "ux-extractor"],
+      "setup": {
+        "type": "manual_clone",
+        "repository": "https://github.com/sooperset/mcp-atlassian.git",
+        "install_command": "uv sync",
+        "directory": "~/projects/mcp-servers/mcp-atlassian"
+      },
+      "environment_variables": {
+        "required": [
+          "JIRA_URL",
+          "JIRA_USERNAME", 
+          "JIRA_API_TOKEN",
+          "CONFLUENCE_URL",
+          "CONFLUENCE_USERNAME",
+          "CONFLUENCE_API_TOKEN"
+        ],
+        "optional": [
+          "JIRA_PROJECTS_FILTER",
+          "CONFLUENCE_SPACES_FILTER",
+          "MCP_VERBOSE"
+        ]
+      },
+      "credentials": {
+        "source": "https://id.atlassian.com/manage-profile/security/api-tokens",
+        "format": "API Token",
+        "permissions": "Full access to projects and spaces"
+      },
+      "capabilities": [
+        "jira_search_issues",
+        "jira_create_issues", 
+        "jira_update_issues",
+        "confluence_search_pages",
+        "confluence_create_pages",
+        "confluence_update_pages"
+      ]
+    },
+    "context7": {
+      "required": true,
+      "critical": true,
+      "purpose": "Real-time library documentation access during component development",
+      "used_by": ["tech-doc-generator", "story-generator"],
+      "setup": {
+        "type": "npx",
+        "package": "@upstash/context7-mcp@latest",
+        "install_command": "npx -y @upstash/context7-mcp@latest"
+      },
+      "environment_variables": {
+        "optional": [
+          "CONTEXT7_TOKEN_LIMIT"
+        ]
+      },
+      "credentials": {
+        "source": "none",
+        "format": "Public service",
+        "permissions": "Read-only documentation access"
+      },
+      "capabilities": [
+        "library_documentation_lookup",
+        "resolve_library_ids",
+        "get_api_references",
+        "find_code_examples"
+      ]
+    },
+    "browser-tools": {
+      "required": true,
+      "critical": true,
+      "purpose": "Browser automation for prototype interaction and UI testing",
+      "used_by": ["ux-extractor", "tech-doc-generator"],
+      "setup": {
+        "type": "npx_with_server",
+        "mcp_package": "@agentdeskai/browser-tools-mcp@latest",
+        "server_package": "@agentdeskai/browser-tools-server@latest",
+        "server_command": "npx @agentdeskai/browser-tools-server@latest",
+        "requires_server": true
+      },
+      "environment_variables": {
+        "optional": [
+          "BROWSER_TOOLS_SERVER_URL"
+        ],
+        "defaults": {
+          "BROWSER_TOOLS_SERVER_URL": "http://localhost:3025"
+        }
+      },
+      "credentials": {
+        "source": "none",
+        "format": "Local server connection",
+        "permissions": "Browser automation via Chrome extension"
+      },
+      "capabilities": [
+        "take_screenshots",
+        "navigate_pages",
+        "click_elements",
+        "fill_forms",
+        "extract_text",
+        "wait_for_elements"
+      ],
+      "notes": [
+        "Requires separate server process to be running",
+        "Chrome extension must be installed and connected",
+        "Server must start before MCP can connect"
+      ]
+    },
+    "figma-api": {
+      "required": true,
+      "critical": true,
+      "purpose": "Figma design analysis and component extraction for technical documentation",
+      "used_by": ["tech-doc-generator", "ux-extractor"],
+      "setup": {
+        "type": "npx",
+        "package": "figma-developer-mcp",
+        "install_command": "npx -y figma-developer-mcp"
+      },
+      "environment_variables": {
+        "required": [
+          "FIGMA_API_KEY"
+        ],
+        "optional": [
+          "DEFAULT_FIGMA_DEPTH"
+        ],
+        "defaults": {
+          "DEFAULT_FIGMA_DEPTH": "2"
+        }
+      },
+      "credentials": {
+        "source": "Figma → Settings → Security → Personal access tokens",
+        "format": "Personal Access Token",
+        "permissions": [
+          "File content",
+          "Dev resources"
+        ]
+      },
+      "capabilities": [
+        "read_figma_files",
+        "extract_components",
+        "analyze_design_tokens",
+        "get_component_properties",
+        "extract_text_content"
+      ],
+      "performance": {
+        "depth_guidelines": {
+          "1": "~2K tokens - Component overview",
+          "2": "~5K tokens - Standard analysis (recommended)", 
+          "3": "~15K tokens - Deep analysis",
+          "default": "25K+ tokens - Complete analysis"
+        },
+        "best_practices": [
+          "Use depth=2 for most components",
+          "Use depth=1 for initial discovery",
+          "Use depth=3 only for complex nested components",
+          "Target specific node IDs when possible"
+        ]
+      }
+    }
+  },
+  "workflows": {
+    "complete_documentation": {
+      "description": "Full documentation generation workflow using all MCPs",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Extract UX behaviors",
+          "agent": "ux-extractor",
+          "mcps": ["browser-tools", "figma-api"]
+        },
+        {
+          "step": 2, 
+          "action": "Generate technical documentation",
+          "agent": "tech-doc-generator", 
+          "mcps": ["figma-api", "context7", "mcp-atlassian"]
+        },
+        {
+          "step": 3,
+          "action": "Create user stories",
+          "agent": "story-generator",
+          "mcps": ["mcp-atlassian", "context7"]
+        }
+      ]
+    },
+    "tech_doc_only": {
+      "description": "Generate only technical documentation",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Generate technical documentation with Figma analysis", 
+          "agent": "tech-doc-generator",
+          "mcps": ["figma-api", "context7", "mcp-atlassian"]
+        }
+      ]
+    },
+    "figma_analysis": {
+      "description": "Analyze Figma designs with optimal performance",
+      "steps": [
+        {
+          "step": 1,
+          "action": "Overview analysis",
+          "mcps": ["figma-api"],
+          "parameters": {
+            "depth": 1
+          }
+        },
+        {
+          "step": 2,
+          "action": "Component analysis", 
+          "mcps": ["figma-api"],
+          "parameters": {
+            "depth": 2
+          }
+        },
+        {
+          "step": 3,
+          "action": "Deep analysis (if needed)",
+          "mcps": ["figma-api"], 
+          "parameters": {
+            "depth": 3
+          }
+        }
+      ]
+    }
+  },
+  "health_check": {
+    "command": "claude mcp list",
+    "expected_servers": 4,
+    "expected_status": "Connected",
+    "troubleshooting": {
+      "connection_failed": "Run: claude mcp remove {server} -s local && re-add server",
+      "authentication_error": "Check API tokens and credentials in .env",
+      "browser_tools_issue": "Ensure browser server is running on port 3025",
+      "figma_token_limit": "Use depth parameter to limit response size"
+    }
+  },
+  "security": {
+    "credential_storage": "Local .env file (not in version control)",
+    "api_token_rotation": "Quarterly recommended",
+    "minimum_permissions": "Use project/space filters to limit access",
+    "backup_config": "Keep .env.backup for recovery",
+    "audit_access": "Review API token usage in vendor admin panels"
+  },
+  "performance": {
+    "figma_optimization": {
+      "default_depth": 2,
+      "max_recommended_depth": 3,
+      "token_limits": {
+        "depth_1": "~2K tokens",
+        "depth_2": "~5K tokens", 
+        "depth_3": "~15K tokens",
+        "default": "25K+ tokens"
+      }
+    },
+    "atlassian_optimization": {
+      "use_project_filters": true,
+      "use_space_filters": true,
+      "cache_results": "Handled by MCP server"
+    }
+  },
+  "maintenance": {
+    "update_schedule": "Monthly",
+    "health_check_frequency": "Weekly", 
+    "credential_rotation": "Quarterly",
+    "backup_frequency": "Before major changes"
+  }
+}
